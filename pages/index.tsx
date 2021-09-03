@@ -3,6 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Account from "../components/Account";
 import ETHBalance from "../components/ETHBalance";
+import LOOTSpecs from "../components/LOOTSpecs";
 import useEagerConnect from "../hooks/useEagerConnect";
 
 function Home() {
@@ -40,6 +41,11 @@ function Home() {
         {isConnected && (
           <section>
             <ETHBalance />
+          </section>
+        )}
+        {isConnected && (
+          <section>
+            <LOOTSpecs id={5377}/>
           </section>
         )}
       </main>
