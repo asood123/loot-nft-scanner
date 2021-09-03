@@ -4,6 +4,7 @@ import Link from "next/link";
 import Account from "../components/Account";
 import ETHBalance from "../components/ETHBalance";
 import LOOTSpecs from "../components/LOOTSpecs";
+import Realm from "../components/Realm";
 import useEagerConnect from "../hooks/useEagerConnect";
 
 function Home() {
@@ -46,6 +47,12 @@ function Home() {
         {isConnected && (
           <section>
             <LOOTSpecs id={5377}/>
+          </section>
+        )}
+
+{isConnected && (
+          <section>
+            <Realm />
           </section>
         )}
       </main>
