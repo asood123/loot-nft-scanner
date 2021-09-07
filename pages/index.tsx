@@ -1,11 +1,21 @@
 import { useWeb3React } from "@web3-react/core";
 import Head from "next/head";
 import Link from "next/link";
+import { useEffect } from "react";
 import Account from "../components/Account";
 import ETHBalance from "../components/ETHBalance";
 import LOOTSpecs from "../components/LOOTSpecs";
 import Realm from "../components/Realm";
 import useEagerConnect from "../hooks/useEagerConnect";
+
+import useRealms from "../hooks/useRealms";
+
+const BAG_START = 0;
+const BAG_END = 7999;
+
+type Derivative = {
+  realm: string,
+}
 
 function Home() {
   const { account, library } = useWeb3React();
@@ -13,6 +23,27 @@ function Home() {
   const triedToEagerConnect = useEagerConnect();
 
   const isConnected = typeof account === "string" && !!library;
+
+  const realms = useRealms();
+
+  const bags: Derivative[] = []
+
+  // TypeError: realms.ownerOf is not a function :(
+  console.log(realms)
+
+  useEffect(() => {
+    if (realms) {
+      (async () => {
+        for (let bag = BAG_START; bag <= BAG_END; ++bag) {
+          bags.push({
+            realm: await realms.ownerOf(bag)
+          })
+        }
+      })()
+    }
+  }, [realms])
+
+
 
   return (
     <div>
